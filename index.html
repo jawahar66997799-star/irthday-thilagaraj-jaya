@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Thilagaraj Mama & Jaya Chinna</title>
+<style>
+/* Page setup */
+body {
+  margin:0;
+  height:100vh;
+  font-family:"Georgia", serif;
+  background: linear-gradient(180deg, #fceabb, #f8b500);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* Card with message */
+.card {
+  background: rgba(255, 248, 225, 0.95);
+  border-radius:30px;
+  padding:40px;
+  text-align:center;
+  box-shadow:0 25px 50px rgba(0,0,0,0.4);
+  border:6px solid #d4af37;
+  position: relative;
+  max-width:700px;
+  z-index:1;
+}
+
+/* Text styles */
+h1 {
+  font-size:48px;
+  color:#e91e63;
+  margin-bottom:15px;
+}
+.names {
+  font-size:32px;
+  font-weight:bold;
+  color:#8e0000;
+  margin-bottom:20px;
+}
+.message {
+  font-size:24px;
+  font-weight:bold;
+  color:#6a1b1a;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+/* Video inside card */
+.birthday-video {
+  width: 100%;       /* fits card width */
+  max-height: 400px; /* keeps video from being too tall */
+  border-radius:15px;
+  margin-top:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+  display:block;
+}
+
+/* Centered start button */
+.start-button {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  padding:20px 35px;
+  font-size:22px;
+  background:#e91e63;
+  color:white;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  z-index:1000;
+}
+
+/* Decorations */
+.diya {position:absolute;font-size:50px;animation:flicker 1.5s infinite alternate;}
+@keyframes flicker {from{opacity:0.8;} to{opacity:1;}}
+.balloon {position:absolute;font-size:40px;animation:rise linear infinite;animation-play-state:paused;}
+@keyframes rise {from {transform: translateY(100vh);} to{transform: translateY(-100px);}}
+.petals {position:absolute;font-size:30px;animation:fall linear infinite;animation-play-state:paused;opacity:0.9;}
+@keyframes fall {0% {transform: translateY(-50px) rotate(0deg);} 100% {transform: translateY(100vh) rotate(360deg);}}
+.firework {position:absolute;font-size:30px;animation:explode 1s ease-out forwards;}
+@keyframes explode {0% {transform: scale(0); opacity:1;} 100% {transform: scale(3); opacity:0;}}
+</style>
+</head>
+<body>
+
+<!-- Start button centered -->
+<button id="startButton" class="start-button">
+  🎉 Tap to Start Birthday Celebration 🎉
+</button>
+
+<!-- Birthday Card -->
+<div class="card">
+  <h1>🎉 Happy Birthday 🎉</h1>
+  <div class="names">Thilagaraj Mama & Jaya Chinna</div>
+  <div class="message">
+    🙏 May God bless you both with long life, prosperity,<br>
+    good health, and endless joy 🙏<br>
+    With love, respect, and heartfelt wishes ❤️
+  </div>
+
+  <!-- Video -->
+  <video id="birthdayVideo" class="birthday-video" loop>
+    <source src="birthday.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- Decorations -->
+<div class="diya" style="left:10%; top:70%;">🪔</div>
+<div class="diya" style="left:80%; top:70%;">🪔</div>
+<div class="diya" style="left:50%; top:75%;">🪔</div>
+
+<!-- Balloons -->
+<div class="balloon" style="left:20%;">🎈</div>
+<div class="balloon" style="left:40%;">🎈</div>
+<div class="balloon" style="left:60%;">🎈</div>
+<div class="balloon" style="left:80%;">🎈</div>
+
+<!-- Petals -->
+<div class="petals" style="left:5%;">🌸</div>
+<div class="petals" style="left:15%;">🌺</div>
+<div class="petals" style="left:30%;">🌸</div>
+<div class="petals" style="left:50%;">🌺</div>
+<div class="petals" style="left:70%;">🌸</div>
+<div class="petals" style="left:85%;">🌺</div>
+
+<script>
+// Elements
+const video = document.getElementById('birthdayVideo');
+const startButton = document.getElementById('startButton');
+
+// Music
+const audio = new Audio('https://cdn.pixabay.com/download/audio/2021/08/04/audio_0f95f0c0b7.mp3?filename=indian-flute-10832.mp3');
+audio.loop = true;
+
+// Tap to start everything
+startButton.addEventListener('click', () => {
+    video.play();
+    audio.play();
+    startButton.style.display = 'none'; // hide button
+    startAnimations();
+});
+
+// Start animations
+function startAnimations(){
+    const balloons = document.querySelectorAll('.balloon');
+    balloons.forEach(b => {
+        b.style.animationPlayState = 'running';
+        b.style.animationDuration = (Math.random()*5 + 5) + 's';
+    });
+
+    const petals = document.querySelectorAll('.petals');
+    petals.forEach(p => {
+        p.style.animationPlayState = 'running';
+        p.style.animationDuration = (Math.random()*5 + 5) + 's';
+    });
+
+    // Fireworks
+    setInterval(() => {
+      const fw = document.createElement('div');
+      fw.className = 'firework';
+      fw.style.left = Math.random()*90 + '%';
+      fw.style.top = Math.random()*40 + '%';
+      fw.textContent = '🎆';
+      document.body.appendChild(fw);
+      setTimeout(()=>fw.remove(),1000);
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
